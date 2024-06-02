@@ -25,17 +25,17 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
     super.initState();
     _model = createModel(context, () => CreateJob2Model());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.noVolTextController ??= TextEditingController();
+    _model.noVolFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.skilTextController ??= TextEditingController();
+    _model.skilFocusNode ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    _model.deadlineTextController ??= TextEditingController();
+    _model.deadlineFocusNode ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController();
-    _model.textFieldFocusNode4 ??= FocusNode();
+    _model.nOtesTextController ??= TextEditingController();
+    _model.nOtesFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -101,8 +101,8 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
                         child: TextFormField(
-                          controller: _model.textController1,
-                          focusNode: _model.textFieldFocusNode1,
+                          controller: _model.noVolTextController,
+                          focusNode: _model.noVolFocusNode,
                           autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -147,7 +147,7 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
-                          validator: _model.textController1Validator
+                          validator: _model.noVolTextControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -161,8 +161,8 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
                         child: TextFormField(
-                          controller: _model.textController2,
-                          focusNode: _model.textFieldFocusNode2,
+                          controller: _model.skilTextController,
+                          focusNode: _model.skilFocusNode,
                           autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -207,7 +207,7 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
-                          validator: _model.textController2Validator
+                          validator: _model.skilTextControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -221,8 +221,8 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
                         child: TextFormField(
-                          controller: _model.textController3,
-                          focusNode: _model.textFieldFocusNode3,
+                          controller: _model.deadlineTextController,
+                          focusNode: _model.deadlineFocusNode,
                           autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -267,7 +267,8 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
-                          validator: _model.textController3Validator
+                          keyboardType: TextInputType.datetime,
+                          validator: _model.deadlineTextControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -281,8 +282,8 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
                         child: TextFormField(
-                          controller: _model.textController4,
-                          focusNode: _model.textFieldFocusNode4,
+                          controller: _model.nOtesTextController,
+                          focusNode: _model.nOtesFocusNode,
                           autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -329,7 +330,7 @@ class _CreateJob2WidgetState extends State<CreateJob2Widget> {
                                   ),
                           maxLines: 9,
                           maxLength: 300,
-                          validator: _model.textController4Validator
+                          validator: _model.nOtesTextControllerValidator
                               .asValidator(context),
                         ),
                       ),
