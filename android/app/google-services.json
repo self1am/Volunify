@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "255079838572",
+    "project_id": "volunify-dbugtx",
+    "storage_bucket": "volunify-dbugtx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255079838572:android:859596f286f78062b5f949",
+        "android_client_info": {
+          "package_name": "com.example.jobbed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvNwlQydG_KIdIZERz_85iv62Y2z07fPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
