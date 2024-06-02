@@ -76,7 +76,7 @@ class _HomePageMAINCompanyWidgetState extends State<HomePageMAINCompanyWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
-              context.pushNamed('createJob2');
+              context.pushNamed('createJob');
             },
             backgroundColor: FlutterFlowTheme.of(context).primary,
             elevation: 8.0,
@@ -138,15 +138,57 @@ class _HomePageMAINCompanyWidgetState extends State<HomePageMAINCompanyWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
                                     padding: EdgeInsets.all(12.0),
-                                    child: Text(
-                                      'Hello World',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontSize: 20.0,
-                                            letterSpacing: 0.0,
+                                    child: StreamBuilder<List<UsersRecord>>(
+                                      stream: queryUsersRecord(
+                                        queryBuilder: (usersRecord) =>
+                                            usersRecord.where(
+                                          'uid',
+                                          isEqualTo: currentUserUid,
+                                        ),
+                                        singleRecord: true,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<UsersRecord> textUsersRecordList =
+                                            snapshot.data!;
+                                        // Return an empty Container when the item does not exist.
+                                        if (snapshot.data!.isEmpty) {
+                                          return Container();
+                                        }
+                                        final textUsersRecord =
+                                            textUsersRecordList.isNotEmpty
+                                                ? textUsersRecordList.first
+                                                : null;
+                                        return Text(
+                                          valueOrDefault<String>(
+                                            textUsersRecord?.displayName,
+                                            'John Doe',
                                           ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 20.0,
+                                                letterSpacing: 0.0,
+                                              ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
@@ -378,6 +420,56 @@ class _HomePageMAINCompanyWidgetState extends State<HomePageMAINCompanyWidget> {
                           .divide(SizedBox(width: 20.0))
                           .addToStart(SizedBox(width: 40.0)),
                     ),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        GoRouter.of(context).prepareAuthEvent();
+                        await authManager.signOut();
+                        GoRouter.of(context).clearRedirectLocation();
+
+                        context.pushNamedAuth('login', context.mounted);
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.logout_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            'Logout',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ]
+                            .divide(SizedBox(width: 20.0))
+                            .addToStart(SizedBox(width: 40.0)),
+                      ),
+                    ),
                   ]
                       .divide(SizedBox(height: 30.0))
                       .addToStart(SizedBox(height: 20.0)),
@@ -556,8 +648,8 @@ class _HomePageMAINCompanyWidgetState extends State<HomePageMAINCompanyWidget> {
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  context.pushNamed('createJob');
                                 },
                                 text: 'Create Event',
                                 options: FFButtonOptions(

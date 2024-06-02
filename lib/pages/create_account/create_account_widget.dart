@@ -102,8 +102,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                 Brightness.dark))
                               Image.asset(
                                 Theme.of(context).brightness == Brightness.dark
-                                    ? 'assets/images/vnimc_1.png'
-                                    : 'assets/images/49svh_2.png',
+                                    ? 'assets/images/49svh_2.png'
+                                    : 'assets/images/vnimc_1.png',
                                 width: 200.0,
                                 height: 121.0,
                                 fit: BoxFit.fitWidth,
